@@ -1,14 +1,217 @@
 {% extends "base/base.html" %}
 
-{% block title %}Inicio | {{ PROJECT_NAME }}{% endblock %}
+{% block title %}{{ PROJECT_NAME }} | Lotes en Tomás Romero Pereira{% endblock %}
+{% block meta_description %}Conoce {{ PROJECT_NAME }} en Tomás Romero Pereira. Información clara, contacto directo y ubicación estratégica para compra de lotes.{% endblock %}
 
 {% block content %}
-<section class="hero">
+<section class="hero-section" id="inicio">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow">Loteamiento en expansión</span>
+            <h1>{{ PROJECT_NAME }}</h1>
+            <p class="hero-lead">
+                Una propuesta pensada para mostrar lotes de forma clara,
+                profesional y orientada a la conversión, con contacto directo y
+                ubicación estratégica en Tomás Romero Pereira.
+            </p>
+
+            <div class="hero-actions">
+                <a
+                    class="btn btn-primary"
+                    href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=Hola,%20quiero%20información%20sobre%20{{ PROJECT_NAME|urlencode }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Solicitar información
+                </a>
+                <a
+                    class="btn btn-secondary"
+                    href="https://www.google.com/maps?q={{ MAP_LAT }},{{ MAP_LNG }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver ubicación
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <strong>Ubicación</strong>
+                    <span>Tomás Romero Pereira</span>
+                </div>
+                <div class="stat-card">
+                    <strong>Coordenadas</strong>
+                    <span>{{ MAP_LAT }}, {{ MAP_LNG }}</span>
+                </div>
+                <div class="stat-card">
+                    <strong>Canal directo</strong>
+                    <span>WhatsApp y correo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-panel">
+            <div class="panel-card">
+                <span class="panel-badge">Proyecto activo</span>
+                <h2>Presentación profesional del loteamiento</h2>
+                <p>
+                    Esta base ya deja el sitio listo para evolucionar hacia una
+                    landing con mapa, disponibilidad, fichas de lotes, leads y
+                    panel administrativo.
+                </p>
+
+                <ul class="check-list">
+                    <li>Diseño responsive</li>
+                    <li>CTA claros y visibles</li>
+                    <li>Base visual coherente</li>
+                    <li>Estructura lista para escalar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-light" id="beneficios">
     <div class="container">
-        <h2>{{ PROJECT_NAME }}</h2>
-        <p>Base Django operativa correctamente.</p>
-        <p>Ubicación base: Tomás Romero Pereira</p>
-        <p>Coordenadas: {{ MAP_LAT }}, {{ MAP_LNG }}</p>
+        <div class="section-heading">
+            <span class="eyebrow">Ventajas de la página</span>
+            <h2>Una landing pensada para vender mejor</h2>
+            <p>
+                El objetivo no es solo verse bien, sino transmitir confianza,
+                mostrar la ubicación rápido y facilitar el contacto comercial.
+            </p>
+        </div>
+
+        <div class="feature-grid">
+            <article class="feature-card">
+                <h3>Jerarquía visual clara</h3>
+                <p>
+                    El usuario entiende rápido qué proyecto está viendo, dónde
+                    queda y qué acción debe tomar.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Enfoque en conversión</h3>
+                <p>
+                    Los llamados a la acción están distribuidos en puntos clave
+                    para capturar la intención comercial sin fricción.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Base lista para crecer</h3>
+                <p>
+                    Esta estructura permite integrar luego mapa interactivo,
+                    lotes disponibles, formularios y panel interno.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="ubicacion">
+    <div class="container location-grid">
+        <div>
+            <div class="section-heading section-heading-left">
+                <span class="eyebrow">Ubicación</span>
+                <h2>Tomás Romero Pereira</h2>
+                <p>
+                    La ubicación se presenta de forma directa para reducir dudas
+                    y facilitar la validación rápida del interesado.
+                </p>
+            </div>
+
+            <div class="location-card">
+                <div class="location-row">
+                    <span>Proyecto</span>
+                    <strong>{{ PROJECT_NAME }}</strong>
+                </div>
+                <div class="location-row">
+                    <span>Zona</span>
+                    <strong>Tomás Romero Pereira</strong>
+                </div>
+                <div class="location-row">
+                    <span>Coordenadas</span>
+                    <strong>{{ MAP_LAT }}, {{ MAP_LNG }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-card">
+            <div class="map-placeholder">
+                <span>Mapa / punto de referencia</span>
+                <strong>{{ MAP_LAT }}, {{ MAP_LNG }}</strong>
+                <a
+                    class="btn btn-secondary"
+                    href="https://www.google.com/maps?q={{ MAP_LAT }},{{ MAP_LNG }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir en Google Maps
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-light" id="proceso">
+    <div class="container">
+        <div class="section-heading">
+            <span class="eyebrow">Proceso comercial</span>
+            <h2>Cómo debería avanzar esta landing</h2>
+            <p>
+                Esta primera versión ordena la comunicación. El siguiente paso
+                será conectar disponibilidad, formularios reales y más contenido comercial.
+            </p>
+        </div>
+
+        <div class="steps-grid">
+            <article class="step-card">
+                <span class="step-number">01</span>
+                <h3>Captación</h3>
+                <p>El usuario llega desde redes, anuncios, QR o búsqueda local.</p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">02</span>
+                <h3>Validación</h3>
+                <p>Confirma ubicación, proyecto y seriedad visual de la propuesta.</p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">03</span>
+                <h3>Conversión</h3>
+                <p>Contacta por WhatsApp o correo para solicitar información.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section section-cta" id="contacto">
+    <div class="container cta-box">
+        <div>
+            <span class="eyebrow eyebrow-light">Siguiente paso</span>
+            <h2>Deja lista la base visual y luego conectamos la lógica real</h2>
+            <p>
+                El frontend ya puede evolucionar a una página comercial completa
+                con lotes, estado, leads y administración.
+            </p>
+        </div>
+
+        <div class="cta-actions">
+            <a
+                class="btn btn-primary btn-light"
+                href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=Hola,%20quiero%20coordinar%20más%20información%20sobre%20{{ PROJECT_NAME|urlencode }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Contactar ahora
+            </a>
+            <a class="btn btn-ghost" href="mailto:{{ CONTACT_EMAIL }}">
+                Escribir por correo
+            </a>
+        </div>
     </div>
 </section>
 {% endblock %}
