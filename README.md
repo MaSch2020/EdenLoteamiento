@@ -281,11 +281,9 @@ sudo systemctl status postgresql
 ### Por HTTPS
 
 ```bash
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-cd TU_REPOSITORIO
+git https://github.com/MaSch2020/EdenLoteamiento.git
+cd EdenLoteamiento
 ```
-
-> Reemplaza `TU_USUARIO` y `TU_REPOSITORIO` por los valores reales del repositorio.
 
 ---
 

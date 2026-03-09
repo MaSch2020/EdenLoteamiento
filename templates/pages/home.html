@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block title %}Inicio | {{ PROJECT_NAME }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h2>{{ PROJECT_NAME }}</h2>
+        <p>Base Django operativa correctamente.</p>
+        <p>Ubicación base: Tomás Romero Pereira</p>
+        <p>Coordenadas: {{ MAP_LAT }}, {{ MAP_LNG }}</p>
+    </div>
+</section>
+{% endblock %}
