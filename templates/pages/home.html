@@ -1,70 +1,92 @@
 {% extends "base/base.html" %}
+{% load static %}
+{% load humanize %}
 
 {% block title %}{{ PROJECT_NAME }} | Lotes en Tomás Romero Pereira{% endblock %}
-{% block meta_description %}Conoce {{ PROJECT_NAME }} en Tomás Romero Pereira. Información clara, contacto directo y ubicación estratégica para compra de lotes.{% endblock %}
+{% block meta_description %}Conoce {{ PROJECT_NAME }} en Tomás Romero Pereira. Lotes, ubicación estratégica, consulta directa y presentación comercial profesional.{% endblock %}
+
+{% block extra_head %}
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+>
+{% endblock %}
 
 {% block content %}
 <section class="hero-section" id="inicio">
     <div class="container hero-grid">
         <div class="hero-copy">
-            <span class="eyebrow">Loteamiento en expansión</span>
-            <h1>{{ PROJECT_NAME }}</h1>
-            <p class="hero-lead">
-                Una propuesta pensada para mostrar lotes de forma clara,
-                profesional y orientada a la conversión, con contacto directo y
-                ubicación estratégica en Tomás Romero Pereira.
-            </p>
+            <span class="eyebrow">Proyecto destacado</span>
 
-            <div class="hero-actions">
-                <a
-                    class="btn btn-primary"
-                    href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=Hola,%20quiero%20información%20sobre%20{{ PROJECT_NAME|urlencode }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Solicitar información
-                </a>
-                <a
-                    class="btn btn-secondary"
-                    href="https://www.google.com/maps?q={{ MAP_LAT }},{{ MAP_LNG }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Ver ubicación
-                </a>
-            </div>
+            {% if project %}
+                <h1>{{ project.name }}</h1>
+                <p class="hero-lead">{{ project.hero_subtitle }}</p>
 
-            <div class="hero-stats">
-                <div class="stat-card">
-                    <strong>Ubicación</strong>
-                    <span>Tomás Romero Pereira</span>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#contacto">
+                        Solicitar información
+                    </a>
+                    <a
+                        class="btn btn-secondary"
+                        href="https://www.google.com/maps?q={{ project.latitude }},{{ project.longitude }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ver ubicación
+                    </a>
                 </div>
-                <div class="stat-card">
-                    <strong>Coordenadas</strong>
-                    <span>{{ MAP_LAT }}, {{ MAP_LNG }}</span>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <strong>Ubicación</strong>
+                        <span>{{ project.city }}, {{ project.department }}</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <strong>Precio desde</strong>
+                        <span>
+                            {% if project.price_from %}
+                                Gs. {{ project.price_from|intcomma }}
+                            {% else %}
+                                A consultar
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="stat-card">
+                        <strong>Cuota desde</strong>
+                        <span>
+                            {% if project.installment_from %}
+                                Gs. {{ project.installment_from|intcomma }}
+                            {% else %}
+                                A consultar
+                            {% endif %}
+                        </span>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <strong>Canal directo</strong>
-                    <span>WhatsApp y correo</span>
-                </div>
-            </div>
+            {% else %}
+                <h1>{{ PROJECT_NAME }}</h1>
+                <p class="hero-lead">
+                    La estructura del frontend ya está lista, pero aún no hay un proyecto cargado desde el admin.
+                </p>
+            {% endif %}
         </div>
 
         <div class="hero-panel">
             <div class="panel-card">
-                <span class="panel-badge">Proyecto activo</span>
-                <h2>Presentación profesional del loteamiento</h2>
+                <span class="panel-badge">Edén Loteamiento</span>
+                <h2>Una landing preparada para convertir visitas en consultas reales</h2>
                 <p>
-                    Esta base ya deja el sitio listo para evolucionar hacia una
-                    landing con mapa, disponibilidad, fichas de lotes, leads y
-                    panel administrativo.
+                    Esta versión ya integra proyecto, lotes destacados, formulario real de lead y mapa interactivo.
                 </p>
 
                 <ul class="check-list">
-                    <li>Diseño responsive</li>
-                    <li>CTA claros y visibles</li>
-                    <li>Base visual coherente</li>
-                    <li>Estructura lista para escalar</li>
+                    <li>Presentación comercial clara</li>
+                    <li>Mapa interactivo con ubicación real</li>
+                    <li>Lotes visibles y ordenados</li>
+                    <li>Captura de leads desde la home</li>
                 </ul>
             </div>
         </div>
@@ -74,144 +96,215 @@
 <section class="section section-light" id="beneficios">
     <div class="container">
         <div class="section-heading">
-            <span class="eyebrow">Ventajas de la página</span>
-            <h2>Una landing pensada para vender mejor</h2>
+            <span class="eyebrow">Propuesta de valor</span>
+            <h2>Por qué esta estructura ya es una landing utilizable</h2>
             <p>
-                El objetivo no es solo verse bien, sino transmitir confianza,
-                mostrar la ubicación rápido y facilitar el contacto comercial.
+                El usuario entiende rápido qué proyecto está viendo, dónde está, qué lotes se muestran y cómo dejar sus datos.
             </p>
         </div>
 
         <div class="feature-grid">
             <article class="feature-card">
-                <h3>Jerarquía visual clara</h3>
+                <h3>Ubicación clara</h3>
                 <p>
-                    El usuario entiende rápido qué proyecto está viendo, dónde
-                    queda y qué acción debe tomar.
+                    La zona y el mapa aparecen temprano para reducir la fricción inicial del posible comprador.
                 </p>
             </article>
 
             <article class="feature-card">
-                <h3>Enfoque en conversión</h3>
+                <h3>Lotes visibles</h3>
                 <p>
-                    Los llamados a la acción están distribuidos en puntos clave
-                    para capturar la intención comercial sin fricción.
+                    Los lotes destacados permiten presentar disponibilidad sin obligar al usuario a navegar demasiado.
                 </p>
             </article>
 
             <article class="feature-card">
-                <h3>Base lista para crecer</h3>
+                <h3>Contacto directo</h3>
                 <p>
-                    Esta estructura permite integrar luego mapa interactivo,
-                    lotes disponibles, formularios y panel interno.
+                    El lead puede dejar su consulta desde la misma home y también contactar por WhatsApp.
                 </p>
             </article>
         </div>
     </div>
 </section>
 
-<section class="section" id="ubicacion">
+<section class="section" id="lotes">
+    <div class="container">
+        <div class="section-heading section-heading-left">
+            <span class="eyebrow">Lotes destacados</span>
+            <h2>Disponibilidad destacada</h2>
+            <p>
+                Estos bloques ya pueden cargarse desde el admin y funcionar como vitrina comercial inicial.
+            </p>
+        </div>
+
+        <div class="lot-grid">
+            {% for lot in featured_lots %}
+                <article class="lot-card">
+                    <div class="lot-card-top">
+                        <span class="lot-code">{{ lot.code }}</span>
+                        <span class="lot-status lot-status-{{ lot.status }}">{{ lot.status_label }}</span>
+                    </div>
+
+                    <h3>{{ lot.project.name }}</h3>
+
+                    <ul class="lot-details">
+                        <li><strong>Superficie:</strong> {{ lot.area_m2 }} m²</li>
+                        <li>
+                            <strong>Contado:</strong>
+                            {% if lot.price_cash %}
+                                Gs. {{ lot.price_cash|intcomma }}
+                            {% else %}
+                                A consultar
+                            {% endif %}
+                        </li>
+                        <li>
+                            <strong>Cuotas:</strong>
+                            {% if lot.installment_value and lot.installment_count %}
+                                {{ lot.installment_count }} x Gs. {{ lot.installment_value|intcomma }}
+                            {% else %}
+                                A consultar
+                            {% endif %}
+                        </li>
+                    </ul>
+                </article>
+            {% empty %}
+                <div class="empty-state">
+                    <h3>Aún no hay lotes destacados cargados</h3>
+                    <p>Crea lotes desde el admin y marca los que quieras mostrar en la home.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-light" id="ubicacion">
     <div class="container location-grid">
         <div>
             <div class="section-heading section-heading-left">
                 <span class="eyebrow">Ubicación</span>
-                <h2>Tomás Romero Pereira</h2>
+                <h2>Mapa interactivo del proyecto</h2>
                 <p>
-                    La ubicación se presenta de forma directa para reducir dudas
-                    y facilitar la validación rápida del interesado.
+                    El mapa se centra en la ubicación configurada del proyecto y puede evolucionar luego a una vista por lotes.
                 </p>
             </div>
 
-            <div class="location-card">
-                <div class="location-row">
-                    <span>Proyecto</span>
-                    <strong>{{ PROJECT_NAME }}</strong>
+            {% if project %}
+                <div class="location-card">
+                    <div class="location-row">
+                        <span>Proyecto</span>
+                        <strong>{{ project.name }}</strong>
+                    </div>
+                    <div class="location-row">
+                        <span>Ciudad</span>
+                        <strong>{{ project.city }}</strong>
+                    </div>
+                    <div class="location-row">
+                        <span>Departamento</span>
+                        <strong>{{ project.department }}</strong>
+                    </div>
+                    <div class="location-row">
+                        <span>Coordenadas</span>
+                        <strong>{{ project.latitude }}, {{ project.longitude }}</strong>
+                    </div>
                 </div>
-                <div class="location-row">
-                    <span>Zona</span>
-                    <strong>Tomás Romero Pereira</strong>
-                </div>
-                <div class="location-row">
-                    <span>Coordenadas</span>
-                    <strong>{{ MAP_LAT }}, {{ MAP_LNG }}</strong>
-                </div>
-            </div>
+            {% endif %}
         </div>
 
         <div class="map-card">
-            <div class="map-placeholder">
-                <span>Mapa / punto de referencia</span>
-                <strong>{{ MAP_LAT }}, {{ MAP_LNG }}</strong>
-                <a
-                    class="btn btn-secondary"
-                    href="https://www.google.com/maps?q={{ MAP_LAT }},{{ MAP_LNG }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Abrir en Google Maps
-                </a>
+            <div
+                id="project-map"
+                class="project-map"
+                data-lat="{% if project %}{{ project.latitude }}{% else %}{{ MAP_LAT }}{% endif %}"
+                data-lng="{% if project %}{{ project.longitude }}{% else %}{{ MAP_LNG }}{% endif %}"
+                data-zoom="{% if project %}{{ project.map_zoom }}{% else %}{{ MAP_ZOOM }}{% endif %}"
+                data-title="{% if project %}{{ project.name }}{% else %}{{ PROJECT_NAME }}{% endif %}"
+            ></div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="contacto">
+    <div class="container contact-grid">
+        <div>
+            <div class="section-heading section-heading-left">
+                <span class="eyebrow">Consulta directa</span>
+                <h2>Solicita más información</h2>
+                <p>
+                    Este formulario ya guarda leads reales en la base de datos y queda visible desde el admin.
+                </p>
+            </div>
+
+            <div class="contact-info-card">
+                <h3>Canales disponibles</h3>
+                <p><strong>WhatsApp:</strong> +{{ WHATSAPP_NUMBER }}</p>
+                <p><strong>Correo:</strong> {{ CONTACT_EMAIL }}</p>
+                {% if project %}
+                    <p><strong>Proyecto:</strong> {{ project.name }}</p>
+                {% endif %}
             </div>
         </div>
-    </div>
-</section>
 
-<section class="section section-light" id="proceso">
-    <div class="container">
-        <div class="section-heading">
-            <span class="eyebrow">Proceso comercial</span>
-            <h2>Cómo debería avanzar esta landing</h2>
-            <p>
-                Esta primera versión ordena la comunicación. El siguiente paso
-                será conectar disponibilidad, formularios reales y más contenido comercial.
-            </p>
-        </div>
+        <div class="form-card">
+            <form method="post" novalidate>
+                {% csrf_token %}
 
-        <div class="steps-grid">
-            <article class="step-card">
-                <span class="step-number">01</span>
-                <h3>Captación</h3>
-                <p>El usuario llega desde redes, anuncios, QR o búsqueda local.</p>
-            </article>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="{{ form.full_name.id_for_label }}">{{ form.full_name.label }}</label>
+                        {{ form.full_name }}
+                        {% if form.full_name.errors %}
+                            <div class="field-error">{{ form.full_name.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
 
-            <article class="step-card">
-                <span class="step-number">02</span>
-                <h3>Validación</h3>
-                <p>Confirma ubicación, proyecto y seriedad visual de la propuesta.</p>
-            </article>
+                    <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                            <div class="field-error">{{ form.phone.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
 
-            <article class="step-card">
-                <span class="step-number">03</span>
-                <h3>Conversión</h3>
-                <p>Contacta por WhatsApp o correo para solicitar información.</p>
-            </article>
-        </div>
-    </div>
-</section>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="field-error">{{ form.email.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
 
-<section class="section section-cta" id="contacto">
-    <div class="container cta-box">
-        <div>
-            <span class="eyebrow eyebrow-light">Siguiente paso</span>
-            <h2>Deja lista la base visual y luego conectamos la lógica real</h2>
-            <p>
-                El frontend ya puede evolucionar a una página comercial completa
-                con lotes, estado, leads y administración.
-            </p>
-        </div>
+                    <div class="form-group">
+                        <label for="{{ form.lot.id_for_label }}">{{ form.lot.label }}</label>
+                        {{ form.lot }}
+                        {% if form.lot.errors %}
+                            <div class="field-error">{{ form.lot.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
 
-        <div class="cta-actions">
-            <a
-                class="btn btn-primary btn-light"
-                href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=Hola,%20quiero%20coordinar%20más%20información%20sobre%20{{ PROJECT_NAME|urlencode }}"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Contactar ahora
-            </a>
-            <a class="btn btn-ghost" href="mailto:{{ CONTACT_EMAIL }}">
-                Escribir por correo
-            </a>
+                    <div class="form-group form-group-full">
+                        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                            <div class="field-error">{{ form.message.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-submit">
+                    Enviar consulta
+                </button>
+            </form>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+></script>
+<script src="{% static 'js/home-map.js' %}"></script>
 {% endblock %}

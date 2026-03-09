@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
     "django_extensions",
     "apps.core.apps.CoreConfig",
     "apps.pages.apps.PagesConfig",
@@ -156,7 +157,7 @@ DEFAULT_FROM_EMAIL = config(
     default="Edén Loteamiento <no-reply@example.com>",
 )
 
-from django.contrib.messages import constants as messages
+from django.contrib.messages import constants as messages  # noqa: E402
 
 MESSAGE_TAGS = {
     messages.DEBUG: "debug",
