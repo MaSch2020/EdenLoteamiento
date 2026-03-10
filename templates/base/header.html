@@ -9,11 +9,12 @@
         </a>
 
         <nav class="main-nav" aria-label="Navegación principal">
-            <a href="#inicio">Inicio</a>
-            <a href="#beneficios">Beneficios</a>
-            <a href="#ubicacion">Ubicación</a>
-            <a href="#proceso">Proceso</a>
-            <a href="#contacto" class="nav-cta">Consultar</a>
+            <a href="{% url 'pages:home' %}#inicio">Inicio</a>
+            <a href="{% url 'pages:home' %}#beneficios">Beneficios</a>
+            <a href="{% url 'pages:home' %}#lotes">Lotes</a>
+            <a href="{% url 'pages:home' %}#ubicacion">Ubicación</a>
+            <a href="{% url 'pages:home' %}#proceso">Proceso</a>
+            <a href="{% url 'pages:home' %}#contacto" class="nav-cta">Consultar</a>
         </nav>
     </div>
 </header>

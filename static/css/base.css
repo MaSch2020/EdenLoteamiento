@@ -20,6 +20,8 @@
     --radius-md: 18px;
     --radius-lg: 26px;
     --container: 1180px;
+    --header-height: 96px;
+    --anchor-offset: 116px;
     --transition: 180ms ease;
 }
 
@@ -63,11 +65,10 @@ select {
     margin: 0 auto;
 }
 
-/* Header */
 .site-header {
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 1000;
     backdrop-filter: blur(12px);
     background: rgba(18, 60, 47, 0.94);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -142,7 +143,6 @@ select {
     box-shadow: var(--shadow-sm);
 }
 
-/* Messages */
 .messages-wrap {
     padding: 1rem 0 0;
 }
@@ -168,14 +168,15 @@ select {
     border: 1px solid #f2c6c6;
 }
 
-/* Main sections */
 main {
     min-height: 100vh;
 }
 
 .section,
 .hero-section {
+    position: relative;
     padding: 5rem 0;
+    scroll-margin-top: var(--anchor-offset);
 }
 
 .section-light {
@@ -301,7 +302,9 @@ main {
 .feature-card,
 .lot-card,
 .contact-info-card,
-.form-card {
+.form-card,
+.process-card,
+.map-legend-card {
     width: 100%;
     background: var(--surface);
     border: 1px solid var(--line);
@@ -342,7 +345,9 @@ main {
 .feature-card p,
 .location-card,
 .contact-info-card p,
-.form-card p {
+.form-card p,
+.process-card p,
+.map-legend-card p {
     color: var(--muted);
 }
 
@@ -382,23 +387,45 @@ main {
 }
 
 .feature-grid,
-.lot-grid {
+.lot-grid,
+.process-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
 }
 
 .feature-card,
-.lot-card {
+.lot-card,
+.process-card {
     padding: 1.6rem;
 }
 
 .feature-card h3,
 .lot-card h3,
-.contact-info-card h3 {
+.contact-info-card h3,
+.process-card h3,
+.map-legend-card h3 {
     margin: 0 0 0.75rem;
     font-size: 1.15rem;
     color: var(--primary-strong);
+}
+
+.process-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.process-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1rem;
 }
 
 .lot-card-top {
@@ -465,12 +492,13 @@ main {
     display: grid;
     grid-template-columns: 0.95fr 1.05fr;
     gap: 1.5rem;
-    align-items: stretch;
+    align-items: start;
 }
 
 .location-card,
 .contact-info-card,
-.form-card {
+.form-card,
+.map-legend-card {
     padding: 1.35rem;
 }
 
@@ -496,20 +524,92 @@ main {
     text-align: right;
 }
 
+.location-row-stack {
+    flex-direction: column;
+}
+
+.location-row-stack strong {
+    text-align: left;
+}
+
+.map-legend-card {
+    margin-top: 1rem;
+}
+
+.map-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.map-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.legend-dot-available {
+    background: var(--success);
+}
+
+.legend-dot-reserved {
+    background: var(--warning);
+}
+
+.legend-dot-sold {
+    background: var(--danger);
+}
+
+.map-help {
+    margin: 1rem 0 0;
+}
+
 .map-card {
+    position: relative;
+    z-index: 1;
     min-height: 100%;
     padding: 1rem;
+    overflow: hidden;
     background:
         linear-gradient(135deg, rgba(18, 60, 47, 0.08), rgba(183, 135, 82, 0.08)),
         var(--surface);
 }
 
 .project-map {
-    height: 420px;
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 520px;
     width: 100%;
     border-radius: calc(var(--radius-lg) - 6px);
     overflow: hidden;
     border: 1px solid rgba(18, 60, 47, 0.16);
+}
+
+.map-popup {
+    min-width: 210px;
+    line-height: 1.5;
+}
+
+.map-popup-button {
+    margin-top: 0.8rem;
+    width: 100%;
+    min-height: 40px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .form-grid {
@@ -565,7 +665,6 @@ textarea.form-control {
     font-weight: 600;
 }
 
-/* Footer */
 .site-footer {
     background: #102d24;
     color: rgba(255, 255, 255, 0.86);
@@ -598,7 +697,6 @@ textarea.form-control {
     font-size: 0.92rem;
 }
 
-/* Floating WhatsApp */
 .floating-whatsapp {
     position: fixed;
     right: 1rem;
@@ -613,12 +711,12 @@ textarea.form-control {
     box-shadow: var(--shadow-md);
 }
 
-/* Responsive */
 @media (max-width: 1080px) {
     .hero-grid,
     .location-grid,
     .contact-grid,
-    .footer-grid {
+    .footer-grid,
+    .process-grid {
         grid-template-columns: 1fr;
     }
 
@@ -628,6 +726,10 @@ textarea.form-control {
 }
 
 @media (max-width: 860px) {
+    :root {
+        --anchor-offset: 132px;
+    }
+
     .header-inner {
         min-height: auto;
         padding: 1rem 0;
@@ -650,6 +752,10 @@ textarea.form-control {
     .section,
     .hero-section {
         padding: 4rem 0;
+    }
+
+    .project-map {
+        height: 440px;
     }
 }
 
@@ -677,6 +783,10 @@ textarea.form-control {
 
     .location-row strong {
         text-align: left;
+    }
+
+    .project-map {
+        height: 380px;
     }
 
     .floating-whatsapp {

@@ -24,6 +24,19 @@ class HomeView(FormView):
         kwargs["project"] = self.get_active_project()
         return kwargs
 
+    def get_map_lots(self, project):
+        if not project:
+            return []
+
+        lots = project.lots.order_by("order", "block", "number")
+        map_lots = []
+
+        for lot in lots:
+            if lot.map_feature:
+                map_lots.append(lot.map_feature)
+
+        return map_lots
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project = self.get_active_project()
@@ -42,6 +55,7 @@ class HomeView(FormView):
         context["project"] = project
         context["featured_lots"] = featured_lots
         context["available_lots"] = available_lots
+        context["map_lots"] = self.get_map_lots(project)
         return context
 
     def form_valid(self, form):
